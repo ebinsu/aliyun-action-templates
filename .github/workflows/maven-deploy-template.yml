@@ -1,10 +1,13 @@
-name: maven-deploy-env
+name: maven-deploy-template
 
 on:
   workflow_call:
     inputs:
       jdk:
         required: true
+        type: string
+      custom_script:
+        required: false
         type: string
 
 jobs:
@@ -67,3 +70,6 @@ jobs:
                   }
               }
           ]
+    - name: Custom Steps
+      if: ${{ inputs.custom_script != '' }}
+      run: ${{ inputs.custom_script }}
