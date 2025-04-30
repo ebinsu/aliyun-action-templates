@@ -1,12 +1,23 @@
-name: add-maven-repo-setting
+name: maven-deploy-env
 
 on:
   workflow_call:
+    inputs:
+      jdk:
+        required: true
+        type: string
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: ${{ inputs.jdk }}
+        distribution: 'temurin'
+        cache: maven
     - uses: whelk-io/maven-settings-xml-action@v22
       with:
         servers: |
