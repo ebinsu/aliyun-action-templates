@@ -66,7 +66,7 @@ jobs:
       id: docker-meta
       uses: docker/metadata-action@v5.7.0
       with:
-        images: ${{ inputs.docker_registry }}/${{ docker_image_name }}
+        images: ${{ inputs.docker_registry }}/${{ inputs.docker_image_name }}
         tags: |
           type=raw,value=${{ steps.set_image_version.outputs.VERSION }}
           type=raw,value=latest
